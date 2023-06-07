@@ -1,0 +1,7 @@
+1, Triclinic
+2, Monoclinic
+3, Orthorhombic
+4, Tetragonal
+5, Trigonal
+6, Hexagonal
+7, Cubic

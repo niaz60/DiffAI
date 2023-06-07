@@ -1,0 +1,127 @@
+(C) 2021 by FIZ Karlsruhe - Leibniz Institute for Information Infrastructure.  All rights reserved.
+data_10-ICSD
+_database_code_ICSD 10
+_audit_creation_date 1980-01-01
+_audit_update_record 2012-02-01
+_chemical_name_common 'Tristrontium cyclo-triphosphate(V) heptahydrate'
+_chemical_formula_structural 'Sr3 (P3 O9)2 (H2 O)7'
+_chemical_formula_sum 'H14 O25 P6 Sr3'
+_chemical_name_structure_type Sr3(P3O9)2(H2O)7
+_exptl_crystal_density_diffrn 2.66
+_citation_title
+
+;
+Structure cristalline du trimetaphosphate de strontium heptahydrate Sr3 (P3
+O9)2 (H2 O)
+;
+loop_
+_citation_id
+_citation_journal_full
+_citation_year
+_citation_journal_volume
+_citation_page_first
+_citation_page_last
+_citation_journal_id_ASTM
+primary
+
+;
+Acta Crystallographica, Section B: Structural Crystallography and Crystal
+Chemistry
+; 1976 32 205 208 ACBCAR
+loop_
+_citation_author_citation_id
+_citation_author_name
+primary 'Tordjman, I.'
+primary 'Durif, A.'
+primary 'Guitel, J.C.'
+_cell_length_a 16.05(1)
+_cell_length_b 12.33(1)
+_cell_length_c 10.87(1)
+_cell_angle_alpha 90.
+_cell_angle_beta 90.
+_cell_angle_gamma 90.
+_cell_volume 2151.13
+_cell_formula_units_Z 4
+_space_group_name_H-M_alt 'P n m a'
+_space_group_IT_number 62
+loop_
+_space_group_symop_id
+_space_group_symop_operation_xyz
+1 'x+1/2, y, -z+1/2'
+2 'x, -y+1/2, z'
+3 '-x+1/2, y+1/2, z+1/2'
+4 '-x, -y, -z'
+5 '-x+1/2, -y, z+1/2'
+6 '-x, y+1/2, -z'
+7 'x+1/2, -y+1/2, -z+1/2'
+8 'x, y, z'
+loop_
+_atom_type_symbol
+_atom_type_oxidation_number
+Sr2+ 2
+P5+ 5
+O2- -2
+H1+ 1
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_symmetry_multiplicity
+_atom_site_Wyckoff_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_B_iso_or_equiv
+_atom_site_occupancy
+Sr1 Sr2+ 4 c 0.10283(13) 0.25 0.11589(19) . 1.
+Sr2 Sr2+ 4 c 0.33160(13) 0.25 -.00255(19) . 1.
+Sr3 Sr2+ 4 c 0.50341(13) 0.75 0.25188(21) . 1.
+P1 P5+ 8 d 0.28839(24) 0.50401(33) 0.47626(32) . 1.
+P2 P5+ 8 d 0.12791(25) 0.49174(34) 0.34669(34) . 1.
+P3 P5+ 8 d 0.13707(25) 0.47083(34) 0.61139(35) . 1.
+O1 O2- 8 d 0.22833(57) 0.48032(90) 0.36029(85) . 1.
+O2 O2- 8 d 0.09812(6) 0.44314(90) 0.47745(86) . 1.
+O3 O2- 8 d 0.23319(58) 0.44623(89) 0.58495(85) . 1.
+O4 O2- 8 d 0.36425(61) 0.44167(99) 0.45835(98) . 1.
+O5 O2- 8 d 0.29244(60) 0.62123(84) 0.49907(87) . 1.
+O6 O2- 8 d 0.09913(63) 0.41854(98) 0.24921(93) . 1.
+O7 O2- 8 d 0.10522(67) 0.60765(90) 0.34322(91) . 1.
+O8 O2- 8 d 0.10769(67) 0.38986(95) 0.70005(95) . 1.
+O9 O2- 8 d 0.12508(62) 0.587(10) 0.63498(91) . 1.
+O10 O2- 8 d 0.47892(60) 0.62443(90) 0.44941(84) . 1.
+O11 O2- 4 c 0.45286(99) 0.25 0.2995(16) . 1.
+O12 O2- 4 c -.00142(94) 0.25 0.5006(14) . 1.
+O13 O2- 4 c 0.2517(11) 0.25 0.2301(13) . 1.
+O14 O2- 4 c 0.2517(11) 0.75 0.2794(11) . 1.
+O15 O2- 4 c 0.13004(92) 0.75 0.1060(15) . 1.
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_type_symbol
+_atom_site_aniso_beta_11
+_atom_site_aniso_beta_22
+_atom_site_aniso_beta_33
+_atom_site_aniso_beta_12
+_atom_site_aniso_beta_13
+_atom_site_aniso_beta_23
+Sr1 Sr2+ 0.00157(8) 0.00222(13) 0.00271(16) 0 -.00006(10) 0
+Sr2 Sr2+ 0.00194(8) 0.00172(12) 0.00274(16) 0 0.00021(11) 0
+Sr3 Sr2+ 0.00164(7) 0.00253(12) 0.00210(13) 0 -.0001(1) 0
+P1 P5+ 0.00101(15) 0.00163(26) 0.0013(3) 0.00006(16) 0.00010(7) -.00012(24)
+P2 P5+ 0.00132(17) 0.00145(27) 0.00124(27) 0.00001(17) -.00020(17) -.00032(23)
+P3 P5+ 0.00178(16) 0.00133(25) 0.00135(27) -.00005(17) -.00031(19) 0.00011(25)
+O1 O2- 0.00147(45) 0.00229(79) 0.00207(80) -.00022(45) 0.00052(45) 0.00091(66)
+O2 O2- 0.00126(42) 0.00292(80) 0.00157(81) -.00033(47) 0.00067(50) 0.00033(67)
+O3 O2- 0.00154(43) 0.00166(74) 0.00234(90) 0.00024(45) 0.00035(48) 0.00052(65)
+O4 O2- 0.00153(44) 0.00259(88) 0.0043(11) 0.00094(51) -.00106(55) 0.00022(78)
+O5 O2- 0.00207(43) 0.00220(74) 0.00096(81) 0.00071(46) 0.00021(50) 0.00018(69)
+O6 O2- 0.00294(49) 0.00294(83) 0.00176(76) -.00104(53) -.00004(68) -.00068(77)
+O7 O2- 0.00244(47) 0.00130(72) 0.00237(83) -.00009(54) -.00104(56) 0.00024(63)
+O8 O2- 0.00208(46) 0.00306(8) 0.00222(83) -.00028(54) 0.00049(54) 0.00158(73)
+O9 O2- 0.00176(47) 0.00353(87) 0.00230(94) 0.00022(51) 0.00049(53) 0.00063(72)
+O10 O2- 0.00171(45) 0.00247(89) 0.00144(86) 0.00073(46) 0.00066(48) 0.00052(66)
+O11 O2- 0.00154(72) 0.0046(15) 0.0053(16) 0 -.00084(87) 0
+O12 O2- 0.00197(60) 0.0022(10) 0.0025(12) 0 -.0009(8) 0
+O13 O2- 0.00264(71) 0.0045(15) 0.0029(15) 0 -.00035(98) 0
+O14 O2- 0.00372(77) 0.00055(94) 0.0010(11) 0 -.00054(87) 0
+O15 O2- 0.00185(63) 0.00085(95) 0.0047(15) 0 0.00097(87) 0
+#End of TTdata_10-ICSD
+#

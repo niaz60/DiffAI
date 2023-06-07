@@ -1,0 +1,97 @@
+(C) 2021 by FIZ Karlsruhe - Leibniz Institute for Information Infrastructure.  All rights reserved.
+data_2-ICSD
+_database_code_ICSD 2
+_audit_creation_date 2002-04-01
+_chemical_name_common 'Manganese cobalt silicate (1.07/0.93/1)'
+_chemical_formula_structural '(Mn1.07 Co.93) (Si O4)'
+_chemical_formula_sum 'Co0.93 Mn1.07 O4 Si1'
+_chemical_name_structure_type Olivine#Mg2SiO4
+_exptl_crystal_density_diffrn 4.4
+_diffrn_ambient_temperature 20.
+_citation_title
+'Strukturelle und magnetische Untersuchungen an (Mn,Co)-Olivin-Mischkristallen'
+loop_
+_citation_id
+_citation_journal_full
+_citation_year
+_citation_journal_volume
+_citation_page_first
+_citation_page_last
+_citation_journal_id_ASTM
+primary 'Zeitschrift fuer Kristallographie' 1988 182 261 263 ZEKRDZ
+loop_
+_citation_author_citation_id
+_citation_author_name
+primary 'Untersteller, E.'
+primary 'Treutmann, W.'
+primary 'Hellner, E.'
+primary 'Schweiss, P.'
+primary 'Heger, G.'
+primary 'Hosoya, S.'
+_cell_length_a 10.51(1)
+_cell_length_b 6.129(6)
+_cell_length_c 4.823(5)
+_cell_angle_alpha 90.
+_cell_angle_beta 90.
+_cell_angle_gamma 90.
+_cell_volume 310.68
+_cell_formula_units_Z 4
+_space_group_name_H-M_alt 'P n m a'
+_space_group_IT_number 62
+loop_
+_space_group_symop_id
+_space_group_symop_operation_xyz
+1 'x+1/2, y, -z+1/2'
+2 'x, -y+1/2, z'
+3 '-x+1/2, y+1/2, z+1/2'
+4 '-x, -y, -z'
+5 '-x+1/2, -y, z+1/2'
+6 '-x, y+1/2, -z'
+7 'x+1/2, -y+1/2, -z+1/2'
+8 'x, y, z'
+loop_
+_atom_type_symbol
+_atom_type_oxidation_number
+Mn2+ 2
+Co2+ 2
+Mn2+ 2
+Co2+ 2
+Si4+ 4
+O2- -2
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_symmetry_multiplicity
+_atom_site_Wyckoff_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_B_iso_or_equiv
+_atom_site_occupancy
+Mn1 Mn2+ 4 a 0 0 0 . 0.227(2)
+Co1 Co2+ 4 a 0 0 0 . 0.773
+Mn2 Mn2+ 4 c 0.2210(2) 0.25 0.5133(6) . 0.839(2)
+Co2 Co2+ 4 c 0.2210(2) 0.25 0.5133(6) . 0.161
+Si1 Si4+ 4 c 0.4072(2) 0.25 0.0746(4) . 1.
+O1 O2- 4 c 0.4109(1) 0.25 0.7383(3) . 1.
+O2 O2- 4 c 0.0504(1) 0.25 0.2787(3) . 1.
+O3 O2- 8 d 0.3390(1) 0.4630(1) 0.2176(2) . 1.
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_type_symbol
+_atom_site_aniso_U_11
+_atom_site_aniso_U_22
+_atom_site_aniso_U_33
+_atom_site_aniso_U_12
+_atom_site_aniso_U_13
+_atom_site_aniso_U_23
+Mn1 Mn2+ 0.0043(19) -.0002(19) 0.0017(19) 0.0047(16) 0.0004(17) 0.0010(17)
+Co1 Co2+ 0.0043(19) -.0002(19) 0.0017(19) 0.0047(16) 0.0004(17) 0.0010(17)
+Mn2 Mn2+ 0.0005(7) 0.0026(8) 0.0041(9) 0 0.0003(7) 0
+Co2 Co2+ 0.0005(7) 0.0026(8) 0.0041(9) 0 0.0003(7) 0
+Si1 Si4+ 0.0020(5) 0.0026(5) 0.0031(6) 0 0.0001(5) 0
+O1 O2- 0.0048(3) 0.0045(3) 0.0011(5) 0 -.0003(4) 0
+O2 O2- 0.0036(3) 0.0038(4) 0.0038(5) 0 -.0003(4) 0
+O3 O2- 0.0039(2) 0.0038(2) 0.0040(3) 0.0012(2) -.0001(3) -.0004(3)
+#End of TTdata_2-ICSD
+#

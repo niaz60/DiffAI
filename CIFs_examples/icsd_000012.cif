@@ -1,0 +1,97 @@
+(C) 2021 by FIZ Karlsruhe - Leibniz Institute for Information Infrastructure.  All rights reserved.
+data_12-ICSD
+_database_code_ICSD 12
+_audit_creation_date 1980-01-01
+_audit_update_record 2012-08-01
+_chemical_name_common 'Potassium heptachlorodigallate'
+_chemical_formula_structural 'K (Ga2 Cl7)'
+_chemical_formula_sum 'Cl7 Ga2 K1'
+_chemical_name_structure_type KGa2Cl7
+_exptl_crystal_density_diffrn 2.5
+_citation_title
+'Structure cristalline d' un chlorocomplexe de gallium: K Ga2 Cl7'
+loop_
+_citation_id
+_citation_journal_full
+_citation_year
+_citation_journal_volume
+_citation_page_first
+_citation_page_last
+_citation_journal_id_ASTM
+primary
+
+;
+Acta Crystallographica, Section B: Structural Crystallography and Crystal
+Chemistry
+; 1976 32 247 250 ACBCAR
+loop_
+_citation_author_citation_id
+_citation_author_name
+primary 'Mascherpa-Corral, D.'
+primary 'Vitse, P.'
+primary 'Potier, A.'
+primary 'Darriet, J.'
+_cell_length_a 11.8216(3)
+_cell_length_b 8.9440(3)
+_cell_length_c 10.7080(3)
+_cell_angle_alpha 90.
+_cell_angle_beta 90.
+_cell_angle_gamma 90.
+_cell_volume 1132.18
+_cell_formula_units_Z 4
+_space_group_name_H-M_alt 'P n a 21'
+_space_group_IT_number 33
+loop_
+_space_group_symop_id
+_space_group_symop_operation_xyz
+1 'x+1/2, -y+1/2, z'
+2 '-x+1/2, y+1/2, z+1/2'
+3 '-x, -y, z+1/2'
+4 'x, y, z'
+loop_
+_atom_type_symbol
+_atom_type_oxidation_number
+Ga3+ 3
+Cl1- -1
+K1+ 1
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_symmetry_multiplicity
+_atom_site_Wyckoff_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_B_iso_or_equiv
+_atom_site_occupancy
+Ga1 Ga3+ 4 a 0.3874(2) 0.3814(3) 0.2443(4) . 1.
+Ga2 Ga3+ 4 a 0.1750(2) 0.4317(3) 0.5 . 1.
+Cl1 Cl1- 4 a 0.2561(5) 0.2600(6) 0.3706(7) . 1.
+Cl2 Cl1- 4 a 0.2861(6) 0.4511(9) 0.6585(8) . 1.
+Cl3 Cl1- 4 a 0.2929(7) 0.4842(8) 0.0997(7) . 1.
+Cl4 Cl1- 4 a 0.0144(6) 0.3379(7) 0.5524(8) . 1.
+Cl5 Cl1- 4 a 0.4708(5) 0.5363(7) 0.3672(9) . 1.
+Cl6 Cl1- 4 a 0.1582(6) 0.6298(7) 0.3906(8) . 1.
+Cl7 Cl1- 4 a 0.4917(6) 0.1971(8) 0.1908(8) . 1.
+K1 K1+ 4 a 0.1168(6) 0.3701(8) 0.8878(10) . 1.
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_type_symbol
+_atom_site_aniso_beta_11
+_atom_site_aniso_beta_22
+_atom_site_aniso_beta_33
+_atom_site_aniso_beta_12
+_atom_site_aniso_beta_13
+_atom_site_aniso_beta_23
+Ga1 Ga3+ 0.00017 0.00027 0.00023 0.00011 0.00012 0.00014
+Ga2 Ga3+ 0.00016 0.00026 0.00021 0.00011 0.00012 0.00013
+Cl1 Cl1- 0.0004 0.00062 0.00051 0.00024 0.00024 0.00029
+Cl2 Cl1- 0.00055 0.00028 0.00072 0.00034 0.00028 0.0004
+Cl3 Cl1- 0.00067 0.00091 0.00068 0.00033 0.0003 0.00034
+Cl4 Cl1- 0.00048 0.00084 0.00075 0.00027 0.00026 0.00033
+Cl5 Cl1- 0.0005 0.00091 0.00075 0.00027 0.00033 0.00039
+Cl6 Cl1- 0.00048 0.00072 0.00075 0.00028 0.00027 0.00033
+Cl7 Cl1- 0.00051 0.00087 0.0006 0.00028 0.00026 0.00031
+K1 K1+ 0.00049 0.00102 0.00103 0.00066 0.00036 0.00049
+#End of TTdata_12-ICSD
+#
