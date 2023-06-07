@@ -29,6 +29,6 @@ Please use the pull command to make your code being updated, then push your code
 
 
 ## Progress sync
-:white_large_square: Reorganize the code for 1D XRD generation 
+:white_large_square: Reorganize the code for 1D XRD generation    
 :white_large_square: 2D XRD generation    
 :white_large_square: auto augmentation    
