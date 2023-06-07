@@ -1,4 +1,4 @@
-# XRD_project
+# XRD project
 
 ## How to init the project  
 1. Create a empty foler and enter the created foler.
