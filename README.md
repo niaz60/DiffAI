@@ -24,7 +24,7 @@ Please use the pull command to make your code being updated, then push your code
 
 
 ## How to comment or give some suggestions about the code/progress/result?
-1. Find the ____Issues___ button on this page and open it.  
+1. Find the ___Issues___ button on this page and open it.  
 2. Click the ___New issue__ button and write something.  It is like a post. We can discuss about the submitted issues here. 
 
 
