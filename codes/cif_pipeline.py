@@ -8,22 +8,10 @@ from func_hkl import *
 
 def pipieline(in_dir,out_dir, hkl_max, U, V, W):
 
-    # Here enters the folder of your CIF files. (NO slash on left)
-    # in_dir = "CIFs"
-
-    # Folder for your output files.
-    # out_dir = "database_xrds/ExampleXRDs/"
     if not os.path.exists(out_dir+"/"):
             os.makedirs(out_dir+"/")
 
-    # Calculate hkl planes based on wanted accurracy
-    # Use script func_hkl to generate hkl matrix
-    # print("Generating hkl matrix")
     hkl_info = hkl(hkl_max)
-    # print("hkl_info done!\n") # This print is usually ignored
-
-    # cwdir = os.getcwd()
-    # Count availble CIF files and create directories
     cif_count = 0
     for path, dirs, files in os.walk(in_dir):
         for file in files:
@@ -35,16 +23,6 @@ def pipieline(in_dir,out_dir, hkl_max, U, V, W):
     cif_cal_count = 0
 
 
-    # Create log file
-    # logFolder = f"archive_log/"
-    # if not os.path.exists(logFolder):
-    #         os.makedirs(logFolder)
-    # logFile = logFolder + "logfile.txt"
-    # with open(logFile, "a") as cal_log:
-    #     pass
-
-    # with open(logFile, "r") as cal_log:
-    #     cal_log_lines = cal_log.readlines()
 
     for path, dirs, files in os.walk(in_dir):
         for file in files:
@@ -62,14 +40,7 @@ def pipieline(in_dir,out_dir, hkl_max, U, V, W):
                 # Here record timing
                 # time_cost = format(time.time() - time_start, '.3f')
                 cif_cal_count += 1
-                # print("Time cost:" + time_cost)
-
-                # if "GOOD" in cif_return:
-                #     with open(logFile, "a") as cal_log:
-                #         print(file+" "+cif_return+" "+str(time_cost), file=cal_log)
-                #     print("Result of ", file, ": ", cif_return, ", ", "Good! logged", "\n", 
-                #         'Time cost: ', time_cost)
-    # print("Pipeline complete! Total Fail: ", cif_fail_count, "/", cif_count)
+                
     
     # output folder
     config2Theta = "HighRes2Theta_5to90"
@@ -123,18 +94,13 @@ def pipieline(in_dir,out_dir, hkl_max, U, V, W):
                 labels7Array = labels7Array.astype(int)
                 # save array
                 np.savetxt(labels7, labels7Array, fmt="%d", delimiter=",")
-                # the old way is commented and replaced by np.savetxt
-    #             labels7.write("\n".join(str(item).replace("[", "").replace("]", "") for item in labels7Array.tolist()))
-    #             labels7.write("\n")
             with open(labels230Dir, "a") as labels230:
                 labels230Array = np.zeros((1, 230))
                 labels230Array[0, int(xrdLines[2].split()[1]) - 1] = 1
                 labels230Array = labels230Array.astype(int)
                 # save array
                 np.savetxt(labels230, labels230Array, fmt="%d", delimiter=",")
-                # the old way is commented and replaced by np.savetxt
-    #             labels230.write("\n".join(str(item).replace("[", "").replace("]", "") for item in labels230Array.tolist()))
-    #             labels230.write("\n")
+    
             with open(featuresDir, "a") as features:
                 featuresVector = np.zeros((1, 8500))
                 i = 0
@@ -143,8 +109,6 @@ def pipieline(in_dir,out_dir, hkl_max, U, V, W):
                 featuresVector = featuresVector.astype(int)
                 # save array
                 np.savetxt(features, featuresVector, fmt="%d", delimiter=",")
-    #             features.write("\n".join(str(item).replace("[", "").replace("]", "") for item in featuresVector.tolist()))
-    #             features.write("\n")
             with open(idsDir, "a") as ids:
                 ids.write(fileName.replace(".txt", "").strip())
                 ids.write("\n")
