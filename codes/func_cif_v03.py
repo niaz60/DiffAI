@@ -17,7 +17,7 @@ from func import f_multi
 
 
 
-def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
+def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode, U = 0.05, V = -0.01, W = 0.01):
     # Set print options for digits.
     # Set 3 decimals.
     np.set_printoptions(precision=3)
@@ -401,16 +401,12 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
             translatedAtom[0, [0, 1, 5]] = lattice_atom_info_redu[i, [0, 1, 5]]
             translatedCell = np.vstack([translatedCell, translatedAtom])
 
-        # print("translatedCell")
-        # print(translatedCell.shape[0])
-        # print(translatedCell)
+        
 
         # 2.
         reducedCell = np.unique(translatedCell, axis=0)
 
-        # print("reducedCell")
-        # print(reducedCell.shape[0])
-        # print(reducedCell)
+        
 
         # 3.
         roundedCell = np.zeros((0, 6))
@@ -444,21 +440,14 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
                 roundedAtom[:, [2, 3, 4]] = np.array([[0,0,0],[0,0,1],[0,1,0],[0,1,1],[1,0,0],[1,0,1],[1,1,0],[1,1,1]])
                 roundedCell = np.vstack([roundedCell, roundedAtom])
 
-        # print("roundedCell")
-        # print(roundedCell.shape[0])
-        # print(roundedCell)
 
         #4.
         reducedCell = np.unique(roundedCell, axis=0)
 
-        # print("reducedCell")
-        # print(reducedCell.shape[0])
-        # print(reducedCell)
+
 
         cell_info = np.around(reducedCell, decimals=2)
-        # print("cell_info")
-        # print(cell_info.shape)
-        # print(cell_info[:10])
+
 
         print("Done: SYMM {} in {:.2f}s".format(cell_info.shape[0], time.time()-startTime))
         startTime = time.time()
@@ -470,11 +459,6 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
         if False and cell_info.shape[0] > 200:
             return "Failed: Confirmed atom number exceed limit 200 (Total: {})".format(cell_info.shape[0])
 
-        if False:
-            i = 0
-            for i in range (0, cell_info.shape[0]):
-                if True and cell_info[i, 0] == 7 and cell_info[i, 1] == 1:
-                    print(cell_info[i, :])
 
     elif cal_mode == "check_cif":
         print("3/5 Skip: ATOM + SYMM")
@@ -503,8 +487,8 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
         hkl_d = (1/v) * (hkl_h**2*b**2*c**2*np.sin(alpha)**2 + hkl_k**2*a**2*c**2*np.sin(beta)**2 + hkl_l**2*a**2*b**2*np.sin(gamma)**2 + 2*hkl_h*hkl_k*a*b*c**2*(np.cos(alpha)*np.cos(beta)-np.cos(gamma)) + 2*hkl_k*hkl_l*a**2*b*c*(np.cos(beta)*np.cos(gamma)-np.cos(alpha)) + 2*hkl_h*hkl_l*a*b**2*c*(np.cos(alpha)*np.cos(gamma)-np.cos(beta)))**(1/2)
         hkl_d = 1/hkl_d
 
-        print(a, b, c, alpha, beta, gamma)
-        print(v, hkl_d)
+        # print(a, b, c, alpha, beta, gamma)
+        # print(v, hkl_d)
 
         # Then calculate two_theta.
         wavelength   = 1.5418
@@ -524,15 +508,11 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
         # hkl_2theta is a n*5 array.
         hkl_2theta = np.hstack([hkl_info, two_theta])
         hkl_2theta = np.hstack([hkl_2theta, two_theta_pi])
-        # print("hkl_2theta")
-        # print(hkl_2theta.shape)
-        # print(hkl_2theta[-10:])
+        
 
         # Then we delete its row if 2theta is 0.
         hkl_2theta = hkl_2theta[np.all(hkl_2theta[:, 4:5] != 0, axis=1)]
-        # print("hkl_2theta")
-        # print(hkl_2theta.shape)
-        # print(hkl_2theta[-10:])
+        
 
         hkl_info = np.zeros((hkl_2theta.shape[0], 4))
         two_theta = np.zeros((hkl_2theta.shape[0], 1))
@@ -545,17 +525,13 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
         lp = np.zeros((hkl_2theta.shape[0], 1))
         for i in range (0, hkl_2theta.shape[0]):
             lp[i] = (1 + np.cos(two_theta_pi[i])**2) / (np.cos(two_theta_pi[i]/2)*np.sin(two_theta_pi[i]/2)**2)
-        # print("lp")
-        # print(lp.shape)
-        # print(lp[:10])
+        
 
     # STRUCTURE FACTOR
 
         # Next, vector product of h * x_j.
         hkl_pos = np.matmul(hkl_info[:, [0, 1, 2]], cell_info[:, [2, 3, 4]].T)
-        # print("hkl_pos")
-        # print(hkl_pos.shape)
-        # print(hkl_pos[:10])
+        
 
         # Next, population factor.
         # This depend on the position of the atoms, if one 0/1 -> 1/2, two 0/1 -> 1/4, three 0/1 -> 1/8.
@@ -576,21 +552,13 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
                 pos_pop[i, 0] = 1/4
             elif count == 3:
                 pos_pop[i, 0] = 1/8
-        # print("pos_pop")
-        # print(pos_pop.shape)
-        # print(pos_pop[:10])
+        
 
         # Next, temperature factor, we use the simplest equation. b ranges from 0.5-1 or 1-3.
         temp_factor_b = 0
         s = np.zeros((two_theta_pi.shape[0], 1))
         s = np.sin(two_theta_pi/2) / wavelength
-        # print("s")
-        # print(s.shape)
-        # print(s[:10])
-        temp_factor = np.exp(-temp_factor_b * s**2)
-        # print("temp_factor")
-        # print(temp_factor.shape)
-        # print(temp_factor[:10])
+        
 
 ### ATOM SCATTERING FACTOR
         # Next, atmoic scattering factor.
@@ -614,18 +582,14 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
             col[:, 0] = col[:, 0] * cell_info[i, 5]
             # here replace the correct result in to matrix 'atom_scat'
             atom_scat[:, i] = col[:, 0]
-        # print("atom_scat")
-        # print(atom_scat.shape)
-        # print(atom_scat[:10])
+        
 
         # Final equation. This is the loop of n atoms, calculating f_hkl integration. f_hkl is a 2x1 matrix.
         time_start = time.time()
         expArray = np.exp(2 * np.pi * 1j * hkl_pos)
         struc = np.zeros((hkl_info.shape[0], 1))
         struc[:, 0] = np.square(np.absolute(np.sum(np.matmul(np.multiply(atom_scat, expArray), pos_pop), axis=1))).T
-        # print('struc mp time', format(time.time() - time_start))
-        # print(struc.shape)
-        # print(struc[:10])
+        
 
     # INTENSITIES
     # Intensities take structural factor, polarization factor, angular-velocity and etc together
@@ -636,15 +600,11 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
         x_y[:, 1] = inte[:, 0]
         if True:
             xy_hkl = np.hstack([np.around(x_y, decimals=2), hkl_info])
-            # print("xy_hkl")
-            # print(xy_hkl.shape)
-            # print(xy_hkl[:10])
+            
 
     # After having all twotheta and its intensities, we realize that some intensities are zero, we first filter them out.
         xy_redu = x_y[np.all(x_y!=0, axis=1)]
-        # print("xy_redu")
-        # print(xy_redu.shape)
-        # print(xy_redu[:10])
+        
 
     # After having a pure xy data, we merge their intensites if they are in same peak position.
         xy_merge = np.zeros((1, 2))
@@ -660,29 +620,11 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
                     break
             if merge_judge:
                 xy_merge = np.vstack((xy_merge, xy_redu[i, :]))
-        # print("xy_merge")
-        # print(xy_merge.shape)
-        # print(xy_merge[:10])
+        
 
         # Additional log for exact peak information.
-        if False:
-            new_filename = "xy_hkl_info_{}.txt".format(re.split(r"[.]", cif_file)[0])
-            new_file= open("{}/{}".format(out_dir, new_filename), "w+")
-            #np.savetxt(new_file, pattern, delimiter=',')
-            new_file.write("\n".join(str(item).replace("[", "").replace("]", "") for item in xy_hkl.tolist()))
-            new_file.close()
+        
 
-        # Additional plot bar to verify result.
-        if False:
-            plt.figure(figsize=(15,4))
-            plt.xlim([x_min, x_max])
-            plt.bar(xy_hkl[:,0], xy_hkl[:,1], width=0.2, bottom=None, align='center')
-            plt.show()
-            # This comparison shows an small overlap issue with bar plot.
-            plt.figure(figsize=(15,4))
-            plt.xlim([x_min, x_max])
-            plt.bar(xy_merge[:,0], xy_merge[:,1], width=0.2, bottom=None, align='center')
-            plt.show()
         print("Done: xy merged {} in {:.2f}s".format(xy_merge.shape[0], time.time()-startTime))
         startTime = time.time()
 
@@ -692,28 +634,12 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
     # Set up x-axis and resolutions
     if cal_mode == "draw_xrd":
 
-        U = 0.05
-        V = -0.01
-        W = 0.01
         H = np.zeros((xy_merge.shape[0], 1))
         H[:, 0] = (U * (np.tan(xy_merge[:, 0]*(np.pi/180)/2))**2 + V * np.tan(xy_merge[:, 0] * (np.pi/180)/2) + W)**(1/2)
 
         step = x_step
         total_points = int(180/step)
         # Set up a x-y 1D data
-        if False:
-            time_start = time.time()
-            pattern1  = np.zeros((total_points,2))
-            # Iterate every x position(2theta) using gaussian function
-            x_val = 0
-            for x_val in range (0, total_points):
-                y_val = 0
-                for xyhkl_idx in range (0, xy_merge.shape[0]):
-                    if xy_merge[xyhkl_idx, 0] > (x_val * step - 2) and xy_merge[xyhkl_idx, 0] < (x_val * step + 2):
-                        y_val = y_val + xy_merge[xyhkl_idx, 1] * (gaus((x_val*step - xy_merge[xyhkl_idx, 0]), H[xyhkl_idx, 0]) + 0.5 * gaus((x_val*step - xy_merge[xyhkl_idx, 0]), H[xyhkl_idx, 0]))
-                pattern1[x_val, 0] = x_val*step
-                pattern1[x_val, 1] = y_val
-            print('pattern non-mp', format(time.time() - time_start))
 
         #------------------------------------
         # multiprocess of peak shape function
@@ -729,33 +655,12 @@ def cif(cif_dir, cif_file, out_dir, hkl_info, x_min, x_max, x_step, cal_mode):
         #--------------------------------------------------------
 
         # Normalization, leaving only 2 dicimal
-        if False:
-            pattern1[:,0] = pattern1[:,0].round(decimals=3)
-            pattern1[:,1] = (pattern1[:,1] / np.max(pattern1[:,1])).round(decimals=3)
-        if True:
-            pattern2[:,0] = pattern2[:,0].round(decimals=3)
-            pattern2[:,1] = (pattern2[:,1] / np.max(pattern2[:,1])).round(decimals=3)
-            print('Normalization True')
+        pattern2[:,0] = pattern2[:,0].round(decimals=3)
+        pattern2[:,1] = (pattern2[:,1] / np.max(pattern2[:,1])).round(decimals=3)
+        print('Normalization True')
 
         # Print the plot for preview
         
-        if False:
-            plt.figure(figsize=(10,4))    
-            plt.xlim([x_min, x_max])
-            plt.plot(pattern1[:, 0], pattern1[:,1]) 
-            plt.show()
-        if False:
-            plt.figure(figsize=(15,4))
-            plt.xlim([x_min, x_max])
-            plt.plot(pattern2[:, 0], pattern2[:,1]) 
-            plt.xlabel("Two Theta (Degrees)", fontsize=15)
-            plt.ylabel("Normalized Intensity (Counts)", fontsize=15)
-            plt.title(f"An example of generated XRD plot: {cif_file.split('.')[0]} 'F5 K2 Y1'", fontsize=15)
-            plt.grid(alpha=0.2)
-            plt.tight_layout()
-            # figName = "archive_xrd/archive_figure/{}.jpeg".format(cif_file)
-            figName = f"archive_xrd/temp/{cif_file}.jpg"
-            plt.savefig(figName, dpi=600)
             
         # print ("formula = ", chem_form, "\n", "a = ", cell_a, "\n", "b = ", cell_b, "\n", "c = ", cell_c, "\n", "alpha = ", cell_alpha, "\n", "beta  = ",  cell_beta, "\n", "gamma = ", cell_gamma, "\n")
 
