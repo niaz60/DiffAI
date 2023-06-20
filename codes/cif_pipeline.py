@@ -114,8 +114,8 @@ def pipieline(in_dir,out_dir, hkl_max, U, V, W):
                 ids.write("\n")
 
 if __name__ == "__main__":
-    in_dir = "/home/cxu-serve/p1/rzhu14/xrd/CIFs_examples"
-    out_dir = "/home/cxu-serve/p1/rzhu14/xrd/XRD_output_examples"
+    in_dir = "../CIFs_examples"
+    out_dir = "../XRD_output_examples"
     hkl_max = 10
     U = 1
     V = 1

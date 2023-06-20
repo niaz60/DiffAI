@@ -32,3 +32,20 @@ I also provide a example of issue in the Issues channel.
 :white_large_square: Reorganize the code for 1D XRD generation    
 :white_large_square: 2D XRD generation    
 :white_large_square: auto augmentation    
+
+
+## How to run the pipeline?  
+1. prepare your .cif files in the foler "CIFs_examples".  
+2. conduct the following command,  
+````
+python run cif_pipeline.py
+````  
+3. The transformed data is saved in the foler "XRD_output_examples".  
+
+
+## Tasks to be implemented in data generation codes   
+:white_large_square: Multi-threads to read data, one thread for reading and transforming one .cif file.   
+:white_large_square: Partition the data processing task into multi sub-tasks on different processors. Different process will spawn multiple threads to read and process single .cif file independently and in paralle.      
+:white_large_square: wrap the aforementioned data generation code into the Dataloader.get_item().   
+:white_large_square: We can control the augmentation of data by passing different values of U, V, W to the get_item() function.  
+:white_large_square: Apply our Dataloader to the model training pipeline.  
