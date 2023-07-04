@@ -6,11 +6,19 @@ def gaus(x, h):
     return value
 
 def y_multi(x_val, step, xy_merge, H):
-    y_val = 0
-    xy_idx = 0
-    for xy_idx in range (0, xy_merge.shape[0]):
-        angle = xy_merge[xy_idx, 0]
-        inten = xy_merge[xy_idx, 1]
-        if angle > (x_val * step - 5) and angle < (x_val * step + 5):
-            y_val = y_val + inten * (gaus((x_val * step - angle), H[xy_idx, 0])*1.5)
-    return y_val
+    # y_val = 0
+    # xy_idx = 0
+    # for xy_idx in range (0, xy_merge.shape[0]):
+    #     angle = xy_merge[xy_idx, 0]
+    #     inten = xy_merge[xy_idx, 1]
+    #     if angle > (x_val * step - 5) and angle < (x_val * step + 5):
+    #         y_val = y_val + inten * (gaus((x_val * step - angle), H[xy_idx, 0])*1.5)
+    # return y_val
+    # simply this function to speed up
+    xy_idx = np.arange(0, xy_merge.shape[0])
+    angle = xy_merge[xy_idx, 0]
+    intern = xy_merge[xy_idx, 1]
+    valid_idx = np.where((angle > (x_val * step - 5)) & (angle < (x_val * step + 5)))
+    y_val_vector = np.sum(intern[valid_idx] * (gaus((x_val * step - angle[valid_idx]), H[valid_idx, 0])*1.5))
+    return y_val_vector
+    

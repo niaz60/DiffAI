@@ -15,6 +15,23 @@ import multiprocessing as mp
 import time
 from func import f_multi
 
+space_group_map_dict = {}
+for i in range(1, 3):
+    space_group_map_dict[i] = 1
+for i in range(3, 16):
+    space_group_map_dict[i] = 2
+for i in range(16, 75):
+    space_group_map_dict[i] = 3
+for i in range(75, 143):
+    space_group_map_dict[i] = 4
+for i in range(143, 168):
+    space_group_map_dict[i] = 5
+for i in range(168, 195):
+    space_group_map_dict[i] = 6
+for i in range(195, 231):
+    space_group_map_dict[i] = 7
+
+
 
 def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
     # Locate .cif files. This works for both absolute dir and relative dir.
@@ -33,21 +50,21 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
 
     # Create a dictionary mapping space group to crystal structure.
     # This will be used for the headers of XRD files.
-    space_group_map_dict = {}
-    for i in range(1, 3):
-        space_group_map_dict[i] = 1
-    for i in range(3, 16):
-        space_group_map_dict[i] = 2
-    for i in range(16, 75):
-        space_group_map_dict[i] = 3
-    for i in range(75, 143):
-        space_group_map_dict[i] = 4
-    for i in range(143, 168):
-        space_group_map_dict[i] = 5
-    for i in range(168, 195):
-        space_group_map_dict[i] = 6
-    for i in range(195, 231):
-        space_group_map_dict[i] = 7
+    # space_group_map_dict = {}
+    # for i in range(1, 3):
+    #     space_group_map_dict[i] = 1
+    # for i in range(3, 16):
+    #     space_group_map_dict[i] = 2
+    # for i in range(16, 75):
+    #     space_group_map_dict[i] = 3
+    # for i in range(75, 143):
+    #     space_group_map_dict[i] = 4
+    # for i in range(143, 168):
+    #     space_group_map_dict[i] = 5
+    # for i in range(168, 195):
+    #     space_group_map_dict[i] = 6
+    # for i in range(195, 231):
+    #     space_group_map_dict[i] = 7
         
 # DEFINE VAR
 # Define variables needed during extraction
@@ -361,10 +378,7 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
     # 3.
     roundedCell = np.zeros((0, 6))
     for i in range (0, reducedCell.shape[0]):
-        zeroCount = 0
-        for j in range (2, 5):
-            if reducedCell[i, j] <= 0.02 or reducedCell[i, j] >= 0.98:
-                zeroCount += 1
+        zeroCount = np.sum((reducedCell[i, 2:5] <= 0.02) | (reducedCell[i, 2:5] >= 0.98))
         if zeroCount == 0:
             roundedCell = np.vstack([roundedCell, reducedCell[i, :]])
         elif zeroCount == 1:
@@ -373,6 +387,7 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
                     roundedAtom = np.array([reducedCell[i, :]]*2)
                     roundedAtom[:, j] = np.array([0, 1]).T
                     roundedCell = np.vstack([roundedCell, roundedAtom])
+            
         elif zeroCount == 2:
             j1 = 0
             j2 = 0
@@ -440,10 +455,12 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
     two_theta[:, 0] = hkl_2theta[:, 4]
     two_theta_pi[:, 0] = hkl_2theta[:, 5]
     # After two_theta, we calculate lorentz-polarization factor.
-    lp = np.zeros((hkl_2theta.shape[0], 1))
-    for i in range (0, hkl_2theta.shape[0]):
-        lp[i] = (1 + np.cos(two_theta_pi[i])**2) / (np.cos(two_theta_pi[i]/2)*np.sin(two_theta_pi[i]/2)**2)
-    
+    # lp = np.zeros((hkl_2theta.shape[0], 1))
+    # for i in range (0, hkl_2theta.shape[0]):
+    #     lp[i] = (1 + np.cos(two_theta_pi[i])**2) / (np.cos(two_theta_pi[i]/2)*np.sin(two_theta_pi[i]/2)**2)
+    lp = (1 + np.cos(two_theta_pi)**2) / (np.cos(two_theta_pi/2)*np.sin(two_theta_pi/2)**2)
+    # print(lp_another-lp)
+    # exit()
     # STRUCTURE FACTOR
     # Next, vector product of h * x_j.
     hkl_pos = np.matmul(hkl_info[:, [0, 1, 2]], cell_info[:, [2, 3, 4]].T)
@@ -454,11 +471,12 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
     pos_pop = np.zeros((cell_info.shape[0], 1))
     i = 0
     for i in range (0, cell_info.shape[0]):
-        j = 1
-        count = 0
-        for j in range (2, 5):
-            if cell_info[i, j] == 1 or cell_info[i, j] == 0:
-                count += 1
+        # j = 1
+        # count = 0
+        # for j in range (2, 5):
+        #     if cell_info[i, j] == 1 or cell_info[i, j] == 0:
+        #         count += 1
+        count = np.sum((cell_info[i, 2:5] == 1.) | (cell_info[i, 2:5] == 0.))
         if count == 0:
             pos_pop[i, 0] = 1
         elif count == 1:
@@ -469,7 +487,7 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
             pos_pop[i, 0] = 1/8
     
     # Next, temperature factor, we use the simplest equation. b ranges from 0.5-1 or 1-3.
-    s = np.zeros((two_theta_pi.shape[0], 1))
+    # s = np.zeros((two_theta_pi.shape[0], 1))
     s = np.sin(two_theta_pi/2) / wavelength
     
     ### ATOM SCATTERING FACTOR
@@ -489,9 +507,9 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
         j = 0
         for j in range (0, 7, 2):
             col[:, 0] = col[:, 0] + abc_ion[j, 0] * np.exp(- abc_ion[j+1, 0] * s[:, 0]**2)
-        col[:, 0] = col[:, 0] + abc_ion[8]
+        col[:, 0] = (col[:, 0] + abc_ion[8]) * cell_info[i, 5]
         # Then multiply by occupancy
-        col[:, 0] = col[:, 0] * cell_info[i, 5]
+        # col[:, 0] = col[:, 0] * cell_info[i, 5]
         # here replace the correct result in to matrix 'atom_scat'
         atom_scat[:, i] = col[:, 0]
     
@@ -540,11 +558,12 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
     # Set up a x-y 1D data
     #------------------------------------
     # multiprocess of peak shape function
-    pool = mp.Pool(8)
-    print(xy_merge.shape[0])
-    exit()
-    pattern = pool.starmap(y_multi, [(x_val, step, xy_merge, H) for x_val in range (0, total_points)])
-    pool.close()
+    # pool = mp.Pool(8)
+    # print(xy_merge.shape[0])
+    # exit()
+    # pattern = pool.starmap(y_multi, [(x_val, step, xy_merge, H) for x_val in range (0, total_points)])
+    pattern = [y_multi(x_val, step, xy_merge, H) for x_val in range (0, total_points)] 
+    # pool.close()
     pattern2 = np.zeros((total_points,2))
     pattern2[:, 1] = np.asarray(pattern)
     pattern2[:, 0] = np.arange(0,180,step)
