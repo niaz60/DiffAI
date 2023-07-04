@@ -6,6 +6,7 @@ from func_hkl import *
 import time 
 from XRD_Loader import *
 from tqdm import tqdm
+import numpy as np
 
 # define a MLP, the input is 8500 and output is 7
 class MLP(torch.nn.Module):
@@ -42,11 +43,13 @@ if __name__ == '__main__':
     net.cuda()
     loss_func = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(net.parameters(), lr=0.001)
+    uvw_pilices = [[1,1,1],[0,1,1],[1,0,1]]
     for _ in tqdm(range(10), desc='epoch'):
         acc_a = 0.0
         loss_a = 0.0
         n = 0
         for i, data in enumerate(xrd_dataloader):
+            xrd_dataloader.dataset.uvw_info = uvw_pilices[np.random.choice([0,1,2],p=[0.5,0.25,0.25],size=1)[0]]
             feature, l7, l230 = data
             # import pdb; pdb.set_trace()
             feature = feature.squeeze(1).cuda().float()
