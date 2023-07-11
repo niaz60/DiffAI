@@ -3,7 +3,7 @@ import os
 
 import torchvision
 from PIL import Image
-from ..func_hkl import *
+from ..functions import *
 from torch.utils.data import SubsetRandomSampler, Sampler
 from torch.utils.data.dataset import ConcatDataset
 from torchvision.transforms import transforms

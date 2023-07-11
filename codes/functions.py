@@ -1,3 +1,80 @@
+
+import numpy as np
+import pandas as pd
+def f_multi(i, pos_pop, atom_scat, hkl_pos):
+    matrix = pos_pop[i, 0] * atom_scat[:, i] * np.exp(2 * np.pi * 1j * hkl_pos[:,i])
+    return matrix
+
+def rmv_brkt(string):
+    if string == '.':
+        return 0
+    return float(string.replace("(", "").replace(")", "").replace("-.", "-0.").replace('?', '0').replace("..", "."))
+
+
+def gaus(x, h):
+    const_g = 4 * np.log(2)
+    value = ((const_g**(1/2)) / (np.pi**(1/2) * h)) * np.exp(-const_g * (x/h)**2)
+    return value
+
+def y_multi(x_val, step, xy_merge, H):
+    # y_val = 0
+    # xy_idx = 0
+    # for xy_idx in range (0, xy_merge.shape[0]):
+    #     angle = xy_merge[xy_idx, 0]
+    #     inten = xy_merge[xy_idx, 1]
+    #     if angle > (x_val * step - 5) and angle < (x_val * step + 5):
+    #         y_val = y_val + inten * (gaus((x_val * step - angle), H[xy_idx, 0])*1.5)
+    # return y_val
+    # simply this function to speed up
+    xy_idx = np.arange(0, xy_merge.shape[0])
+    angle = xy_merge[xy_idx, 0]
+    intern = xy_merge[xy_idx, 1]
+    valid_idx = np.where((angle > (x_val * step - 5)) & (angle < (x_val * step + 5)))
+    y_val_vector = np.sum(intern[valid_idx] * (gaus((x_val * step - angle[valid_idx]), H[valid_idx, 0])*1.5))
+    return y_val_vector
+
+
+def sym_op(symm_op_line, symm_atom_info):
+    
+    import numpy as np
+    import re
+    import pandas as pd   
+    
+    # Here I use re.split to split the string first(seperated by several signs)
+    # Then filter out empty string
+    # Then, reversely assign each operations
+    symm_op_x = list(filter(None, (re.split(r"[\s,']", symm_op_line))))[-3].replace("X", "x").replace("Y", "y").replace("Z", "z")
+    symm_op_y = list(filter(None, (re.split(r"[\s,']", symm_op_line))))[-2].replace("X", "x").replace("Y", "y").replace("Z", "z")
+    symm_op_z = list(filter(None, (re.split(r"[\s,']", symm_op_line))))[-1].replace("X", "x").replace("Y", "y").replace("Z", "z")
+    
+    # Atom positions after apply symmetry operation
+    # Here we reduce the shape of matrix from n*6 to n*5, dumped the idx column
+    atom_info_symm = np.zeros((symm_atom_info.shape[0], symm_atom_info.shape[1]))
+    # We know x, y, z fraction should be copied from previous matrix's column 3, 4, 5
+    x = symm_atom_info[:, 2]
+    y = symm_atom_info[:, 3]
+    z = symm_atom_info[:, 4]
+    # Here we use pd.eval to change string to executable expression
+    # Inwhich 3 expressions, varaibles are x, y, z defined above
+    x_new = pd.eval(symm_op_x)
+    y_new = pd.eval(symm_op_y)
+    z_new = pd.eval(symm_op_z)
+    
+    # Build the matrix that stores atom information after applying symmetry op
+    # This column is atom number, remain unchanged
+    atom_info_symm[:, 0] = symm_atom_info[:, 0]
+    atom_info_symm[:, 1] = symm_atom_info[:, 1]
+    # These 3 columns are changed, they are coordinates
+    atom_info_symm[:, 2] = x_new
+    atom_info_symm[:, 3] = y_new
+    atom_info_symm[:, 4] = z_new
+    # This column is atom occupancy, remain unchanged
+    atom_info_symm[:, 5] = symm_atom_info[:, 5]
+    
+    # Return the newly built matrix, ready to be appended
+    return atom_info_symm
+
+
 def hkl(hkl_max):
     
     import numpy as np

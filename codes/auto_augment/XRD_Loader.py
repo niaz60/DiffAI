@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 import os
 from direct_cif_reader import *
-from func_hkl import *
+from ..functions import *
 import time 
 class XRD_dataset(Dataset):
     def __init__(self,folder_path, x_step, hkl_info, uvw_info,transform=None):

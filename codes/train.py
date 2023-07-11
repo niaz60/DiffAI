@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 import os
 from direct_cif_reader import *
-from func_hkl import *
+from functions import *
 import time 
 from XRD_Loader import *
 from tqdm import tqdm

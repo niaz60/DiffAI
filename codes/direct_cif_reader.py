@@ -6,14 +6,10 @@
 import numpy as np
 import os
 import re
-from func_rmv_brkt import rmv_brkt
-from func_sym_op import sym_op
-from func_hkl import hkl
-from func_peak_shape import gaus, y_multi
+from functions import *
 import matplotlib.pyplot as plt
 import multiprocessing as mp
 import time
-from func import f_multi
 
 space_group_map_dict = {}
 for i in range(1, 3):
