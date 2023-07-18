@@ -37,7 +37,7 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
         cif_content_lines = cif_content.readlines()
         
     # Open tables for ion scattering data.
-    with open("ion scattering table.txt", "r") as scat_table:
+    with open("configs/ion scattering table.txt", "r") as scat_table:
         scat_table_lines = scat_table.readlines()
     # And create a dictionary using this file to log ions with its idx.
     chem_dict = {}

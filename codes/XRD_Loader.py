@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 import os
 from direct_cif_reader import *
-from func_hkl import *
+from functions import *
 import time 
 class XRD_dataset(Dataset):
     def __init__(self,folder_path, x_step, hkl_info, uvw_info):
@@ -49,4 +49,4 @@ if __name__ == '__main__':
     times = np.array(times)
     print('time: ', np.mean(times))
     
-    # sequential: 30.99023127555847
+    # time:  4.777305603027344 num_workers = 8
