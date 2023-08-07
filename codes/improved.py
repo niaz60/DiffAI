@@ -257,8 +257,8 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info,pool=None):
         chem_dict[line.split()[0]] = line.split()[1]
 
         
-# DEFINE VAR
-# Define variables needed during extraction
+    # DEFINE VAR
+    # Define variables needed during extraction
 
     # 1. CELL & INFO.
     # There are 6 parameters to describe a cell. Its 3 lengths and 3 angles.
@@ -325,8 +325,8 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info,pool=None):
     # Initially, comment judge = False
     comment_judge = False
     
-# ASSIGN VAR
-# Read CIF for desired variables.
+    # ASSIGN VAR
+    # Read CIF for desired variables.
     
     line_count = 0
     for line in cif_content_lines:
@@ -447,8 +447,8 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info,pool=None):
     # print("Done: CIF {}".format(cif_file))
     # startTime = time.time()
         
-# CAL VAR
-# Calculate variables.
+    # CAL VAR
+    # Calculate variables.
 
     # 1. ATOM
     # If no space group information, we return Failed
@@ -598,8 +598,8 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info,pool=None):
     #4.
     reducedCell = np.unique(roundedCell, axis=0)
     cell_info = np.around(reducedCell, decimals=2)
-# CAL PEAK
-# Calculate peak positions and peak intensities.
+    # CAL PEAK
+    # Calculate peak positions and peak intensities.
     # Since we have hkl_info inputed, we use general equations to calculate distance between hkl planes.
     hkl_h = hkl_info[:, 0]
     hkl_k = hkl_info[:, 1]
@@ -616,8 +616,7 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info,pool=None):
     hkl_d = np.zeros((hkl_info.shape[0], 1))
     hkl_d = (1/v) * (hkl_h**2*b**2*c**2*np.sin(alpha)**2 + hkl_k**2*a**2*c**2*np.sin(beta)**2 + hkl_l**2*a**2*b**2*np.sin(gamma)**2 + 2*hkl_h*hkl_k*a*b*c**2*(np.cos(alpha)*np.cos(beta)-np.cos(gamma)) + 2*hkl_k*hkl_l*a**2*b*c*(np.cos(beta)*np.cos(gamma)-np.cos(alpha)) + 2*hkl_h*hkl_l*a*b**2*c*(np.cos(alpha)*np.cos(gamma)-np.cos(beta)))**(1/2)
     hkl_d = 1/hkl_d
-    # print(a, b, c, alpha, beta, gamma)
-    # print(v, hkl_d)
+    
     # Then calculate two_theta.
     wavelength   = 1.5418
     two_theta    = np.zeros((hkl_info.shape[0], 1))
@@ -724,10 +723,7 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info,pool=None):
     
     
     # final xy_merge (1121, 2)
-    # import pdb; pdb.set_trace()
     # Additional log for exact peak information.
-    # plt.plot(np.arange(len(nums)), nums)
-    # plt.savefig("nums.png")
     # exit()
     # Peak Shape Functions
     # Defined in "func_peak_shape.py"
@@ -746,35 +742,22 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info,pool=None):
         pattern = pool.starmap(y_multi, [(x_val, step, xy_merge, H) for x_val in range (0, total_points)])
     else:
         pattern = [y_multi(x_val, step, xy_merge, H) for x_val in range (0, total_points)]
-    # import pdb; pdb.set_trace()
-    # pattern = [y_multi(x_val, step, xy_merge, H) for x_val in range (0, total_points)] 
-    # pool.close()
-    # print(pattern)
+    
     pattern2 = np.zeros((total_points,2))
     pattern2[:, 1] = np.asarray(pattern)
     pattern2[:, 0] = np.arange(0,180,step)
-    # print("Done: XRD pattern {} steps in {:.2f}s".format(total_points, time.time()-startTime))
-    # startTime = time.time()
+   
     #--------------------------------------------------------
     # Normalization, leaving only 2 dicimal
     pattern2[:,0] = pattern2[:,0].round(decimals=3)
     pattern2[:,1] = (pattern2[:,1] / np.max(pattern2[:,1])).round(decimals=3)
-    # print('Normalization True')
-    # Print the plot for preview
+    
+    
     labels7 = int(crystal_sys)
     labels230 = int(space_group)
     featuresVector = pattern2[500:9000,1] * 1000
     featuresVector = featuresVector.astype(int).reshape(1, -1)
-    # print ("formula = ", chem_form, "\n", "a = ", cell_a, "\n", "b = ", cell_b, "\n", "c = ", cell_c, "\n", "alpha = ", cell_alpha, "\n", "beta  = ",  cell_beta, "\n", "gamma = ", cell_gamma, "\n")
-    # Write to new txt file.
-    # new_filename = "{}.txt".format(re.split(r"[.]", cif_file)[0])
-    # with open("{}/{}".format(out_dir, new_filename), "w") as new_file:
-    #     new_file.write(chem_form  + "\n")
-    #     new_file.write("crystal_structure " + str(int(crystal_sys)) + "\n")
-    #     new_file.write("space_group " + str(int(space_group)) + "\n")
-    #     new_file.write("\n".join(str(item).replace("[", "").replace("]", "") for item in pattern2.tolist()))
-    # print("Done: pipeline in {:.2f}s".format(time.time()-startTime))
-    # return [chem_form, crystal_sys, space_group, "\n".join(str(item).replace("[", "").replace("]", "") for item in pattern2.tolist())]
+
     
     return featuresVector, labels7, labels230
 

@@ -372,7 +372,7 @@ def cif(cif_dir, cif_file,  x_step, hkl_info,  uvw_info):
     reducedCell = np.unique(translatedCell, axis=0)
     
     # 3.
-    roundedCell = np.zeros((0, 6))
+    roundedCell = np.zeros((0, 6)) 
     for i in range (0, reducedCell.shape[0]):
         zeroCount = np.sum((reducedCell[i, 2:5] <= 0.02) | (reducedCell[i, 2:5] >= 0.98))
         if zeroCount == 0:
