@@ -49,3 +49,6 @@ python run cif_pipeline.py
 :white_check_mark: wrap the aforementioned data generation code into the Dataloader.get_item().   
 :white_check_mark: We can control the augmentation of data by passing different values of U, V, W to the get_item() function.  
 :white_check_mark: Apply our Dataloader to the model training pipeline.  
+
+
+We uploaded the pre-trained models in https://drive.google.com/drive/folders/1gDmfmgV0u3lZRSa-W7Z2nJpXb0wQOpnD?usp=sharing
