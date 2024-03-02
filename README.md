@@ -30,7 +30,7 @@ I also provide a example of issue in the Issues channel.
 
 ## Progress sync
 :white_check_mark: Reorganize the code for 1D XRD generation    
-:white_large_square: 2D XRD generation    
+:white_check_mark: 2D XRD generation    
 :white_large_square: auto augmentation    
 
 
