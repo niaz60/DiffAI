@@ -41,6 +41,9 @@ I also provide a example of issue in the Issues channel.
 python run cif_pipeline.py
 ````  
 3. The transformed data is saved in the foler "XRD_output_examples".  
+4. For paper reproduce, please check "paper_reproduce".    
+train_{ARCH}.py is used for training ARCH on "datapath" wrote in the code file.     
+ARCH={MLP, CNN, NP}, where NP is the no-pooling CNN.    
 
 
 ## Tasks to be implemented in data generation codes   
