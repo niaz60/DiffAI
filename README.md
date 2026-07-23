@@ -51,4 +51,4 @@ python run cif_pipeline.py
 :white_check_mark: Apply our Dataloader to the model training pipeline.  
 
 
-We uploaded the pre-trained models in https://drive.google.com/drive/folders/1gDmfmgV0u3lZRSa-W7Z2nJpXb0wQOpnD?usp=sharing
+We uploaded the pre-trained models in [this link](https://huggingface.co/zeliang0426/XRD_models)
